@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "target": "es5",
+    "module": "commonjs",
+    "lib": ["es2015", "es2016", "es2017", "esnext", "dom"],
+    "strict": true,
+    "inlineSourceMap": true,
+    "declaration": true,
+    "outDir": "./lib",
+    "rootDir": "./src"
+  },
+  "files": ["./src/parallel_executor.ts"],
+  "exclude": [
+    "node_modules",
+    "lib"
+  ]
+}

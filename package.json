@@ -1,0 +1,35 @@
+{
+  "name": "parallel-executors",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf lib/*",
+    "test": "ts-mocha -p tsconfig.json tests/**/*.test.ts --timeout 50000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rockyzh/parallel-executors.git"
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "author": "rockyzh@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rockyzh/parallel-executors/issues"
+  },
+  "homepage": "https://github.com/rockyzh/parallel-executors#readme",
+  "devDependencies": {
+    "@types/expect": "^24.3.0",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^13.13.5",
+    "mocha": "^7.1.2",
+    "ts-mocha": "^7.0.0",
+    "ts-node": "^8.10.1",
+    "tslint": "^6.1.2",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.8.3"
+  }
+}
