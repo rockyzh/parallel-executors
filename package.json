@@ -15,6 +15,13 @@
   "files": [
     "lib/**/*"
   ],
+  "keywords": [
+    "promise",
+    "all",
+    "async",
+    "parallel",
+    "concurrent"
+  ],
   "author": "rockyzh@gmail.com",
   "license": "MIT",
   "bugs": {
