@@ -12,7 +12,7 @@ export default class ParallelExecutor<T> {
 
   constructor(source: Iterable<T>, options?: Partial<ParallelExecutorOptions<T>>) {
     this.source = source;
-    this.options = Object.assign({ workers: 1, executor: () => false }, options || {});
+    this.options = Object.assign({ workers: 1, executor: async (item: Promise<void>) => { await item; return false; } }, options || {});
   }
 
   async execute() {
