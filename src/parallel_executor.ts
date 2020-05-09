@@ -7,16 +7,25 @@ export interface ParallelExecutorOptions<T> {
 }
 
 export default class ParallelExecutor<T> {
-  source: Iterable<T>;
+  source: Iterator<T>;
   options: ParallelExecutorOptions<T>;
 
-  constructor(source: Iterable<T>, options?: Partial<ParallelExecutorOptions<T>>) {
-    this.source = source;
+  constructor(source: AsyncIterable<T> | Iterable<T>, options?: Partial<ParallelExecutorOptions<T>>) {
+    if (Symbol.asyncIterator in source) {
+      // @ts-ignore
+      this.source = source[ Symbol.asyncIterator ]();
+    } else if (Symbol.iterator in source) {
+      // @ts-ignore
+      this.source = source[ Symbol.iterator ]();
+    } else {
+      throw new Error('invalid source of a parallel executor');
+    }
+
     this.options = Object.assign({ workers: 1, executor: async (item: (() => Promise<void>) | Promise<void>) => { typeof item === 'function' ? (await item()) : (await item); return false; } }, options || {});
   }
 
   async execute() {
-    const taskSource = new TaskSource(this.source[ Symbol.iterator ]());
+    const taskSource = new TaskSource(this.source);
 
     const workers: Array<Promise<void>> = [];
     for (let i = 0; i < this.options.workers; i++) {

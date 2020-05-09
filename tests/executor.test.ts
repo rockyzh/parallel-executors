@@ -34,6 +34,45 @@ describe('parallel executors test', function () {
     });
   });
 
+  describe('iterable', function () {
+    const obj = {
+      *[ Symbol.iterator ]() {
+        for (let i = 0; i < 100; i++) {
+          yield i;
+        }
+      }
+    }
+
+    it('should run for iterable', async function () {
+      assert(await new ParallelExecutor(obj, {
+        workers: 3,
+        executor: async () => {
+          await sleep(10);
+        }
+      }).execute() === 100, 'should run all tasks');
+    });
+  });
+
+  describe('async iterable', function () {
+    const obj = {
+      async *[ Symbol.asyncIterator ]() {
+        for (let i = 0; i < 10; i++) {
+          yield (async (index: number) => {
+            console.info('async iterable', index);
+            await sleep(100);
+          })(i);
+        }
+      }
+    }
+
+    it('should run for iterable', async function () {
+      assert(await new ParallelExecutor(obj, {
+        workers: 2
+      }).execute() === 10, 'should run all tasks');
+    });
+  });
+
+
   describe('array', function () {
     const cases = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
 
