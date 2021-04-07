@@ -25,7 +25,6 @@ export default class Worker<T> {
   private async exec() {
     const item = await this.source.next();
     if (item.done) {
-      this.ch.done();
       this.ch.close();
       return;
     } else {
@@ -34,7 +33,6 @@ export default class Worker<T> {
           if (stopping) {
             this.source.stop();
 
-            this.ch.done();
             this.ch.close();
 
             resolve();
@@ -45,7 +43,6 @@ export default class Worker<T> {
         }).catch(err => {
           this.source.stop();
 
-          this.ch.done();
           this.ch.close();
 
           reject(err);
