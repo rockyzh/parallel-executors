@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf lib/*",
-    "test": "ts-mocha -p tsconfig.json tests/**/*.test.ts --timeout 50000"
+    "test": "ts-mocha -p tsconfig.json tests/**/*.test.ts --timeout 50000",
+    "pub": "npm run publish"
   },
   "repository": {
     "type": "git",
