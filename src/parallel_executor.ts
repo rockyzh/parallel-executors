@@ -47,6 +47,6 @@ export default class ParallelExecutor<T> {
   }
 
   async waitFinished(msTimeout = 3000) {
-    await Promise.race([ sleep(msTimeout), Promise.all(this.workers.map(worker => worker.waitFinished(msTimeout)))]);
+    await Promise.race([ sleep(msTimeout, true), Promise.all(this.workers.map(worker => worker.waitFinished(msTimeout)))]);
   }
 }

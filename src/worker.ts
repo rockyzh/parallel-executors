@@ -52,6 +52,6 @@ export default class Worker<T> {
   }
 
   async waitFinished(msTimeout = 3000) {
-    await Promise.race([ sleep(msTimeout), promisify(this.ch)() ]);
+    await Promise.race([ sleep(msTimeout, true), promisify(this.ch)() ]);
   }
 }

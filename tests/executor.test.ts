@@ -126,4 +126,19 @@ describe('parallel executors test', function () {
       await assert.rejects(executor.execute(), error);
     });
   });
+
+  describe('timeout', function() {
+    it('wait timeout', async function () {
+      const executor = new ParallelExecutor([ 1 ], {
+        workers: 3,
+        executor: async (item: number) => {
+          await sleep(5000);
+        }
+      });
+
+      executor.execute();
+
+      await assert.rejects(executor.waitFinished(1000), error => error.message === 'Timeout', '');
+    })
+  })
 });
