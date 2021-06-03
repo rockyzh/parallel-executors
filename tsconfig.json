@@ -6,7 +6,7 @@
     "lib": ["es2015", "es2016", "es2017", "esnext", "dom"],
     "strict": true,
     "noImplicitAny": false,
-    "inlineSourceMap": true,
+    "inlineSourceMap": false,
     "declaration": true,
     "allowJs": true,
     "outDir": "./lib",

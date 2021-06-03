@@ -23,31 +23,26 @@ export default class Worker<T> {
   }
 
   private async exec() {
-    const item = await this.source.next();
-    if (item.done) {
-      this.ch.close();
-      return;
-    } else {
-      await new Promise<void>((resolve, reject) => {
-        this.executor(item.value).then(stopping => {
+    while (true) {
+      const item = await this.source.next();
+      if (item.done) {
+        this.ch.close();
+        return;
+      } else {
+        try {
+          const stopping = await this.executor(item.value);
           if (stopping) {
             this.source.stop();
-
             this.ch.close();
-
-            resolve();
-            return;
           }
-
-          this.exec().then(resolve).catch(reject);
-        }).catch(err => {
+        } catch (err) {
           this.source.stop();
 
           this.ch.close();
 
-          reject(err);
-        });
-      });
+          throw err;
+        }
+      }
     }
   }
 
