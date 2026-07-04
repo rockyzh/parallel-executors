@@ -9,7 +9,7 @@ function sleep(timeout: number) {
   });
 }
 
-describe('parallel executors test', function () {
+describe('parallel executors (legacy suite — kept for regression)', function () {
   describe('generator', function () {
     function* sources(count: number) {
       for (let i = 0; i < count; i++) {
@@ -58,7 +58,6 @@ describe('parallel executors test', function () {
       async *[ Symbol.asyncIterator ]() {
         for (let i = 0; i < 10; i++) {
           yield (async (index: number) => {
-            console.info('async iterable', index);
             await sleep(100);
           })(i);
         }
@@ -96,7 +95,7 @@ describe('parallel executors test', function () {
   });
 
   describe('run async functions', function () {
-    const cases = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ].map(value => (async () => { console.info('async function', value); await sleep(10); }));
+    const cases = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ].map(value => (async () => { await sleep(10); }));
 
     it('should run all async functions', async function () {
       assert(await new ParallelExecutor(cases).execute() === cases.length, 'should run all tasks');
@@ -104,7 +103,7 @@ describe('parallel executors test', function () {
   });
 
   describe('run promises', function () {
-    const cases = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ].map(value => (async () => { console.info('promise', value); await sleep(10); })());
+    const cases = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ].map(value => (async () => { await sleep(10); })());
 
     it('should run all promises', async function () {
       assert(await new ParallelExecutor(cases).execute() === cases.length, 'should run all tasks');
