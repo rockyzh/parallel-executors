@@ -7,7 +7,8 @@
     "build": "tsc",
     "clean": "rm -rf lib/*",
     "test": "ts-mocha -p tsconfig.json tests/**/*.test.ts --timeout 50000",
-    "pub": "npm version patch && npm publish"
+    "pub": "npm version patch && npm publish",
+    "coverage": "nyc ts-mocha -p tsconfig.test.json tests/**/*.test.ts --timeout 50000"
   },
   "repository": {
     "type": "git",
@@ -38,7 +39,8 @@
     "ts-node": "^8.10.1",
     "tslint": "^6.1.2",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "nyc": "^17.1.0"
   },
   "dependencies": {
     "chan": "^0.6.1"
