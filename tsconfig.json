@@ -10,7 +10,8 @@
     "declaration": true,
     "allowJs": true,
     "outDir": "./lib",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "skipLibCheck": true
   },
   "files": ["./src/parallel_executor.ts"],
   "exclude": [
