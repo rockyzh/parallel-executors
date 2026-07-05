@@ -34,8 +34,8 @@
     "@types/expect": "^24.3.0",
     "@types/mocha": "^7.0.2",
     "@types/node": "^13.13.5",
-    "mocha": "^7.1.2",
-    "ts-mocha": "^7.0.0",
+    "mocha": "^11.7.6",
+    "ts-mocha": "^11.1.0",
     "ts-node": "^8.10.1",
     "tslint": "^6.1.2",
     "tslint-config-prettier": "^1.18.0",
@@ -44,5 +44,11 @@
   },
   "dependencies": {
     "chan": "^0.6.1"
+  },
+  "overrides": {
+    "serialize-javascript": "^7.0.7",
+    "diff": "^9.0.0",
+    "js-yaml": "^4.1.0",
+    "uuid": ">=11.1.1"
   }
 }
